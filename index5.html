@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+    background: rgb(109, 210, 244);
+    font: normal 15pt Arial;
+}
+
+header {
+    color: white;
+    font: bolder;
+    text-align: center;
+}
+
+footer {
+    color: white;
+    font: bolder;
+    text-align: center;
+    margin: 15px;
+}
+
+section {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.260);
+}
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Age Checker</h1>
+    </header>
+    <section>
+        <div>
+            <p>Year of birth:
+            <input type="number" name="txtano" id="txtano">
+        </p>
+            <p>Sex:
+                <input type="radio" name="radsex" id="masc" checked>
+                <label for="masc">Male</label>
+                <input type="radio" name="radsex" id="fem">
+                <label for="fem">Female</label>
+            </p>
+            <p>
+                <input type="button" value="Verify" onclick="verificar()">
+            </p>
+        </div>
+        <div id="res">
+            Fill in the details above to see the result!
+        </div>
+    </section>
+    <footer>
+        By <a href="https://github.com/tarcisiomenezes2023" target="_blank">Tarcísio Menezes</a>
+    </footer>
+
+    <script>
+        function verificar() {
+    var data = new Date()
+    var ano = data.getFullYear()
+    var fANO = document.getElementById('txtano')
+    var res = document.getElementById('res')
+
+    if (fANO.value.length == 0 || fANO.value > ano)
+    window.alert('[ERROR] Verify the data and try again!')
+
+    else {
+        var fSEX = document.getElementsByName('radsex')
+        var idade = ano - Number(fANO.value)
+        var genero = ''
+        var img = document.createElement('img')
+        img.setAttribute('id', 'foto')
+
+        if (fSEX[0].checked) {
+            genero = 'Man'
+            if (idade >= 0 && idade < 10) {
+                /* crianca */
+                img.setAttribute('src', 'pic-boy.jpg')
+            } else if (idade < 21) {
+                /* Jovem */
+                img.setAttribute('src', 'pic-young-man.jpg')
+            } else if (idade < 55){
+                /* Adulto */
+                img.setAttribute('src', 'man.jpg')
+
+            } else if (idade <= 100){
+                /* idoso */
+                img.setAttribute('src', 'pic-Old-man.jpg')
+            } else {
+                /* Caveira */
+                img.setAttribute('src', 'pexels-chris-j-mitchell-1528375.jpg')
+            }
+            
+
+        } else if (fSEX[1].checked) {
+            genero = 'Woman'
+            if (idade >= 0 && idade < 10) {
+                /* crianca */
+                img.setAttribute('src', 'pic-girl.jpg')
+            } else if (idade < 21) {
+                /* Jovem */
+                img.setAttribute('src', 'pic-young-girl.jpg')
+            } else if (idade < 55){
+                /* Adulto */
+                img.setAttribute('src', 'pic-woman.jpg')
+
+            } else if (idade <= 100) {
+                /* idoso */
+                img.setAttribute('src', 'pic-Old-woman.jpg')
+            } else {
+                /* Caveira */
+                res.innerHTML = 'We detected ' + genero + ' with ' + idade + ' years in DECOMPOSITION'
+                img.setAttribute('src', 'pexels-chris-j-mitchell-1528375.jpg')
+                
+            }
+        }
+        res.style.textAlign = 'center'
+        res.innerHTML = 'We detected ' + genero + ' with ' + idade + ' years.'
+        res.appendChild(img)
+        img.setAttribute("style","border-radius: 50%" )
+        img.setAttribute("width", "250")
+        img.setAttribute("height", "250")
+
+    }
+}
+    </script>
+    
+    
+</body>
+</html>
+
